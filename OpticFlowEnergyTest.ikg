@@ -1,0 +1,62 @@
+<group title="Sparse Flow Energy Demo">
+
+    <module
+        class = "EnergyMeter"
+        name = "EnergyMeter"
+        address = "192.168.33.1/status"
+        _x = "10" 
+        _y = "10"
+    />
+	<module
+		class="InputVideoFile" 
+		name="InputVideo" 
+        filename="bikecam_320.mp4"
+        _size_x="320"
+        _size_y="240"
+		_frame_rate="29.97" 
+		frame_rate="30" 
+	/>
+
+
+	<module class = "FASTDetector" name = "FAST" />
+
+
+
+	<connection  source = "InputVideo.INTENSITY"  target = "FAST.INPUT" delay="0" />
+
+
+	<module class="SparseFlow" 
+		magnification = "200"
+	
+	/>
+
+	<connection  source = "InputVideo.INTENSITY"  target = "SparseFlow.INPUT" delay="0" />	
+	<connection  source = "InputVideo.INTENSITY"  target = "SparseFlow.INPUT_LAST" delay="1" />
+
+	<connection  source = "FAST.POINTS"  target = "SparseFlow.POINTS" delay="0" />
+	<connection  source = "FAST.POINTS"  target = "SparseFlow.POINTS_LAST" delay="1" />
+
+	<connection  source = "FAST.POINTS_COUNT"  target = "SparseFlow.POINTS_COUNT" delay="0" />
+	<connection  source = "FAST.POINTS_COUNT"  target = "SparseFlow.POINTS_COUNT_LAST" delay="1" />
+<view name="View Images" >
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "gray" frame-style = "" h = "4" height = "241" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "no" show_frame = "false" show_title = "false" source = "D1.OUTPUT" style = "" title = "Output" w = "4" width = "281" x = "20" y = "0" opacity_source = ""/>
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "rgb" frame-style = "" height = "961" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "yes" show_frame = "false" show_title = "false" source = "InputVideo.RED+GREEN+BLUE" style = "" title = "Image" width = "1021" x = "300" y = "0" opacity_source = ""/>
+	<table  colorize = "true" decimals = "0" direction = "normal" frame-style = "" height = "21" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "FAST.POINT_COUNT" style = "" title = "Default Title" width = "121" x = "420" y = "980"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Points" title = "Default Title" width = "61" x = "360" y = "980"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "100" min = "0" parameter = "FAST.threshold" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "20"/>
+	<marker  color = "yellow" count = "0" fill = "red" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" labelAlign = "center" labelBaseline = "middle" labelDecimals = "2" labelFont = "18px sans-serif" labelOffsetX = "0" labelOffsetY = "0" labelPostfix = "" labelPrefix = "" labelType = "none" labels = "" lineCap = "butt" lineJoin = "miter" lineWidth = "1" markerType = "cross" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "col" scale_x = "1" scale_y = "1" scales = "invisible" select = "0" selectValue = "" show_frame = "false" show_title = "false" size = "0.02" source = "FAST.POINTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<path  arrow = "true" close = "false" color = "red" count = "0" fill = "gray" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" lineCap = "butt" lineJoin = "miter" lineWidth = "2" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "row" scale_x = "1" scale_y = "1" scales = "invisible" select = "0" show_frame = "false" show_title = "false" source = "SparseFlow.DISPLACEMENTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "1000" min = "0" parameter = "SparseFlow.magnification" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "60"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "0.2" min = "0" parameter = "SparseFlow.feature_threshold" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "0.01" style = "" title = "Sliders" width = "221" x = "1500" y = "100"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "100" min = "0" parameter = "SparseFlow.feature_radius" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "140"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Fast Threshold" title = "Default Title" width = "141" x = "1340" y = "20"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Vector Magnification" title = "Default Title" width = "161" x = "1340" y = "60"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Feature Threshold" title = "Default Title" width = "141" x = "1340" y = "100"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Feature Radius" title = "Default Title" width = "141" x = "1340" y = "140"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Search Radius" title = "Default Title" width = "141" x = "1340" y = "180"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "0.2" min = "0" parameter = "SparseFlow.search_radius" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "0.01" style = "" title = "Sliders" width = "221" x = "1500" y = "180"/>
+	<table  x = "1560" y = "240" height = "61" width = "201" title = "Default Title" source = "EnergyMeter.MEASURED_POWER" label_x = "" label_y = "" direction = "normal" decimals = "4" colorize = "true" scrollable = "false" show_title = "false" show_frame = "false" style = "" frame-style = ""/>
+	<plot  x = "1360" y = "240" height = "200" width = "200" title = "Plot" source = "EnergyMeter.MEASURED_POWER" select = "" min = "0" max = "20" buffer_size = "50" direction = "vertical" color = "" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+</group>

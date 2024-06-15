@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<group title="ClassificationMetrics Example">
+	
+		<module
+			class = "ClassificationMetrics"
+			name = "ClassificationMetricsInstance"
+			windowlength  = "10"
+			debug="no"
+		/>
+		<module
+			class = "Constant"
+			name = "MyConstant1"
+			outputsize  = "10"
+			data  = "1 0 1 0 1 0 0 0 1 0"
+		/>
+		<module
+			class = "Constant"
+			name = "MyConstant2"
+			outputsize  = "10"
+			data  = "0 1 0 0 0 1 0 0 1 0"
+		/>
+		<module
+			class = "Constant"
+			name = "Effort"
+			outputsize  = "1"
+			data  = "3"
+		/>
+		<module
+			class = "Constant"
+			name = "Energy"
+			outputsize  = "1"
+			data  = "10"
+		/>
+		<module
+			class = "Constant"
+			name = "Classification"
+			outputsize  = "1"
+			data  = "1"
+		/>
+		
+		
+        <connection source = "MyConstant1.OUTPUT" target = "ClassificationMetricsInstance.INPUT1" />
+        <connection source= "MyConstant2.OUTPUT" target = "ClassificationMetricsInstance.INPUT2" />
+		<connection source= "Effort.OUTPUT" target = "ClassificationMetricsInstance.EFFORT" />
+		<connection source= "Energy.OUTPUT" target = "ClassificationMetricsInstance.ENERGY" />
+		<connection source= "Classification.OUTPUT" target = "ClassificationMetricsInstance.CLASSIFICATION" />
+
+		<view name="View" >
+			<plot  h = "500" max = "2" min = "0" source = "ClassificationMetricsInstance.METRICENERGY" w = "500" x = "100" y = "60" title = "Plot" select = "" buffer_size = "50" direction = "vertical" color = "" show_title = "true" show_frame = "false" style = "" frame-style = "" width = "341" height = "361"/>
+			<table  x = "440" y = "60" height = "101" width = "221" title = "Default Title" source = "ClassificationMetricsInstance.METRICENERGY" label_x = "" label_y = "" direction = "normal" decimals = "4" colorize = "true" scrollable = "false" show_title = "false" show_frame = "false" style = "" frame-style = ""/>
+		</view>
+
+
+</group>
+ 

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<group title="SampleCompare Example">
+	
+		<module
+			class = "SampleCompare"
+			name = "SampleCompareInstance"
+			debug = "yes"
+		/>
+
+		<module
+			class = "Constant"
+			name = "MyConstant1"
+			outputsize  = "10"
+			data  = "1 0 1 0 1 0 0 0 1 0"
+		/>
+		<module
+			class = "Constant"
+			name = "MyConstant2"
+			outputsize  = "10"
+			data  = "0 1 0 0 0 1 0 0 1 0"
+		/>
+		<module
+			class = "Constant"
+			name = "Effort"
+			outputsize  = "1"
+			data  = "3"
+		/>
+		
+		
+		
+        <connection source = "MyConstant1.OUTPUT" target = "SampleCompareInstance.INPUT1" />
+        <connection source= "MyConstant2.OUTPUT" target = "SampleCompareInstance.INPUT2" />
+		<connection source= "Effort.OUTPUT" target = "SampleCompareInstance.EFFORT" />
+
+<view name="View" >
+	<table  h = "500" max = "2" min = "0" source = "MyConstant1.OUTPUT" with = "500" x = "100" y = "100" title = "Default Title" label_x = "" label_y = "" direction = "normal" decimals = "0" colorize = "true" scrollable = "false" show_title = "false" show_frame = "false" style = "" frame-style = "" width = "521" height = "101"/>
+	<grid  h = "500" max = "2" min = "0" source = "SampleCompareInstance.OUTPUT" w = "500" x = "100" y = "360" title = "output" red = "" green = "" blue = "" labels = "" label_parameter = "" labelWidth = "100" command = "" parameter = "" valueHigh = "1" valueLow = "0" color = "" fill = "gray" colorTable = "" lineWidth = "1" shape = "rectangle" size = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "true" show_frame = "false" style = "" frame-style = "" width = "521" height = "101"/>
+	<table  h = "500" max = "2" min = "0" source = "MyConstant2.OUTPUT" with = "500" x = "100" y = "200" title = "Default Title" label_x = "" label_y = "" direction = "normal" decimals = "0" colorize = "true" scrollable = "false" show_title = "false" show_frame = "false" style = "" frame-style = "" width = "521" height = "101"/>
+	<slider-horizontal  x = "640" y = "100" height = "200" width = "200" title = "Effort" parameter = "Effort.data" select = "0" count = "1" labels = "" min = "0" max = "20" step = "1" show_values = "true" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+
+</group>
+ 

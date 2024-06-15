@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<class name="RandomOnes" description="minimal example module">
+
+	<description type="text">
+		Module an array of randomly placed ones
+
+	</description>
+
+	<example description="A simple example">
+		<module
+			class="RandomOnes"
+			name="RandomOnes"
+			size = "10"
+			debug = "true"
+		/>
+	</example>
+
+	<parameter name="size" type="int" default="10" description="size of input" />
+	<parameter name="debug" type="bool" default="false" description="Turns on or off debugmode" />
+
+	<input name="INPUT" description="The the number of randomly places 1's" />
+
+	<output name="OUTPUT" description="The array of randomly placed 1's" size_param="size" />
+
+	<link class="RandomOnes" />
+
+	<author>
+		<name>Trond Arild Tjöstheim</name>
+		<email>kog13ttj@student.lu.se</email>
+		<affiliation>Lund University Cognitive Science</affiliation>
+		<homepage></homepage>
+	</author>
+
+   <files>
+   		<file>RandomOnes.h</file>
+   		<file>RandomOnes.cc</file>
+   		<file>RandomOnes.ikc</file>
+   </files>
+
+</class>

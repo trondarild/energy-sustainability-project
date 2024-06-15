@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<group title="Example">
+<!-- Modules -->
+<module
+		class="InputVideoFile" 
+		name="InputVideo" 
+        filename="bikecam.mp4"
+		_frame_rate="29.97" 
+		frame_rate="30" 
+		list_devices = "yes"
+
+		id ="0"
+	/>
+<!--Connections-->	
+
+<!-- View -->
+<view>
+<image  x = "40" y = "40" height = "200" width = "200" title = "InputVideo.INTENSITY" source = "InputVideo.INTENSITY" opacity_source = "" file = "" index = "" module = "" command = "" format = "gray" scale = "both" opacity = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+</group>

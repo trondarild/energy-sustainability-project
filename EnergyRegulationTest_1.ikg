@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<group title="EnergyRegulationTest_1">
+<!-- Modules -->
+<module
+    class = "EnergyMeter"
+    name = "EnergyMeter"
+    address = "192.168.33.1/status"
+    _x = "10" 
+    _y = "10"
+/>
+
+
+    <_module
+        class = "InputJPEG"
+        name = "IN"
+        filename = "image%d.jpg"
+        filecount = "5"
+        repeats = "2"
+    /> 
+
+    <module
+        class = "InputPNG"
+        name = "IN"
+        filename = "eye.png"
+        filecount = "1"
+    />
+
+    <module
+        class = "GaussianEdgeDetector"
+        name = "Gaussian"
+        scale = "3"
+    />
+
+    <module 
+        class = "EdgeSegmentation"
+        name = "Edges"
+        threshold = "0.1"
+    />
+
+     <module 
+        class = "CircleDetector"
+        name = "Circle"
+        min_radius = "20"
+        max_radius = "40"
+    />
+
+    
+<!--Connections-->	
+    <connection  source = "IN.INTENSITY"  target = "Gaussian.INPUT" delay="0" />
+    
+    <connection  source = "Gaussian.OUTPUT"  target = "Edges.INPUT" delay="0" />
+    <connection  source = "Gaussian.dx"  target = "Edges.DX" delay="0" />
+    <connection  source = "Gaussian.dy"  target = "Edges.DY" delay="0" />
+
+    <connection  source = "Edges.EDGE_LIST"  target = "Circle.EDGE_LIST" delay="0" />
+    <connection  source = "Edges.EDGE_LIST_SIZE"  target = "Circle.EDGE_LIST_SIZE" delay="0" />
+<!-- View -->
+<view name="View Energy" >
+	<plot  buffer_size = "5000" color = "" direction = "vertical" frame-style = "" height = "221" max = "10" min = "0" select = "" show_frame = "true" show_title = "true" source = "EnergyMeter.MEASURED_POWER" style = "--decimals: 0" title = "Power (W)" width = "461" x = "20" y = "20"/>
+	<plot  buffer_size = "5000" color = "" direction = "vertical" frame-style = "" height = "201" max = "0.1" min = "0" select = "" show_frame = "false" show_title = "true" source = "EnergyMeter.ENERGY" style = "--decimals: 3" title = "Energy (kWh)" width = "461" x = "20" y = "220"/>
+	<table  x = "480" y = "20" height = "200" width = "200" title = "Measured power" source = "EnergyMeter.MEASURED_POWER" label_x = "" label_y = "" direction = "normal" decimals = "4" colorize = "true" scrollable = "false" show_title = "true" show_frame = "true" style = "" frame-style = ""/>
+</view>
+<view name="View Images" >
+	<image  x = "40" y = "40" height = "200" width = "200" title = "IN.INTENSITY" source = "IN.INTENSITY" opacity_source = "" file = "" index = "" module = "" command = "" format = "gray" scale = "both" opacity = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<path  x = "240" y = "60" height = "181" width = "181" title = "edges.edge_elements" source = "Edges.EDGE_ELEMENTS" order = "col" select = "0" count = "0" color = "yellow" fill = "gray" lineWidth = "1" lineCap = "butt" lineJoin = "miter" close = "false" arrow = "false" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "false" show_frame = "false" style = "" frame-style = "" scale_x = "1" scale_y = "1"/>
+	<marker  x = "40" y = "60" height = "200" width = "200" title = "" source = "Circle.POSITION" order = "col" select = "0" selectValue = "" count = "0" markerType = "circle" size = "0.02" color = "RED" fill = "gray" lineWidth = "1" lineCap = "butt" lineJoin = "miter" labelType = "none" labels = "" labelFont = "18px sans-serif" labelDecimals = "2" labelPrefix = "" labelPostfix = "" labelAlign = "center" labelBaseline = "middle" labelOffsetX = "0" labelOffsetY = "0" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "false" show_frame = "false" style = "" frame-style = "" scale_x = "1" scale_y = "1"/>
+	<image  x = "40" y = "280" height = "200" width = "200" title = "Gaussian" source = "Gaussian.OUTPUT" opacity_source = "" file = "" index = "" module = "" command = "" format = "gray" scale = "both" opacity = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<image  x = "240" y = "280" height = "221" width = "201" title = "Edges" source = "Edges.OUTPUT" opacity_source = "" file = "" index = "" module = "" command = "" format = "gray" scale = "both" opacity = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<slider-horizontal  x = "240" y = "500" height = "121" width = "261" title = "Edges threshold" parameter = "Edges.threshold" select = "0" count = "1" labels = "" min = "0" max = "0.2" step = "0.01" show_values = "true" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<slider-horizontal  x = "240" y = "620" height = "121" width = "261" title = "Edges grid" parameter = "Edges.grid" select = "0" count = "1" labels = "" min = "0" max = "10" step = "0.01" show_values = "true" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<plot  x = "500" y = "60" height = "201" width = "281" title = "Measured power" source = "EnergyMeter.MEASURED_POWER" select = "" min = "0" max = "20" buffer_size = "50" direction = "vertical" color = "" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+
+</group>

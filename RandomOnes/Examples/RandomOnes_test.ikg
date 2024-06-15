@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<group title="RandomOnes Example">
+	
+		<module
+			class = "Constant"
+			name = "MyConstant"
+			outputsize  = "1"
+			data  = "4"
+		/>
+		
+
+		<module
+			class = "RandomOnes"
+			name = "RandomOnesInstance"
+			size  = "10"
+			debug="no"
+			
+		/>
+		
+        <connection source = "MyConstant.OUTPUT" target = "RandomOnesInstance.INPUT" />
+        
+		<view name="View" >
+			<table  x = "40" y = "40" height = "141" width = "601" title = "Default Title" source = "RandomOnesInstance.OUTPUT" label_x = "" label_y = "" direction = "normal" decimals = "0" colorize = "true" scrollable = "false" show_title = "false" show_frame = "false" style = "" frame-style = ""/>
+			<grid  x = "40" y = "220" height = "81" width = "601" title = "" source = "RandomOnesInstance.OUTPUT" red = "" green = "" blue = "" min = "0" max = "1" labels = "" label_parameter = "" labelWidth = "100" command = "" parameter = "" valueHigh = "1" valueLow = "0" color = "" fill = "gray" colorTable = "" lineWidth = "1" shape = "rectangle" size = "1" scales = "no" min_x = "0" max_x = "1" min_y = "0" max_y = "1" flipXAxis = "no" flipYAxis = "no" flipXCanvas = "no" flipYCanvas = "no" show_title = "false" show_frame = "false" style = "" frame-style = ""/>
+		</view>
+
+
+</group>
+ 

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<class name="SampleCompare" description="minimal example module">
+
+	<description type="text">
+		Module that can be used as a start for a new module.
+		Simply change all occurrences of "SampleCompare" to the name of your new module in
+		SampleCompare.cc, MyModule.h and MyModule.ikc (this file), rename the files, and fill
+		in the new code and documentation. This module is located in the
+		UserModules directory.
+	</description>
+
+	<example description="A simple example">
+		<module
+			class="SampleCompare"
+			name="SampleCompare"
+			
+			debug = "true"
+		/>
+	</example>
+
+	<parameter name="debug" type="bool" default="false" description="Turns on or off debugmode" />
+
+	<input name="INPUT1" description="The first input" />
+	<input name="INPUT2" description="The first input" />
+	<input name="EFFORT" description="The first input" />
+
+	<output name="CHOICE" description="Which input was chosen" size="1" />
+	<output name="OUTPUT" description="Copy of chosen input" size_set="INPUT1" />
+
+	<link class="SampleCompare" />
+
+	<author>
+		<name>Trond Arild Tjöstheim</name>
+		<email>kog13ttj@student.lu.se</email>
+		<affiliation>Lund University Cognitive Science</affiliation>
+		<homepage></homepage>
+	</author>
+
+   <files>
+   		<file>SampleCompare.h</file>
+   		<file>SampleCompare.cc</file>
+   		<file>SampleCompare.ikc</file>
+   </files>
+
+</class>
