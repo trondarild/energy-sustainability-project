@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
-<class name="RandomOnes" description="minimal example module">
+<class name="RandomOnes" description="Outputs an array of randomly placed ones">
 
 	<description type="text">
-		Module an array of randomly placed ones
+		Outputs an array of randomly placed ones
 
 	</description>
 

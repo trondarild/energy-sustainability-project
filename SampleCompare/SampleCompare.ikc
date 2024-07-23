@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 
-<class name="SampleCompare" description="minimal example module">
+<class name="SampleCompare" description="Outputs index of the input with most 1's using effortful sampling">
 
 	<description type="text">
-		Module that can be used as a start for a new module.
-		Simply change all occurrences of "SampleCompare" to the name of your new module in
-		SampleCompare.cc, MyModule.h and MyModule.ikc (this file), rename the files, and fill
-		in the new code and documentation. This module is located in the
-		UserModules directory.
+		Module that a module which samples random entries, summing up the sampled entries. 
+		The output of the module is the index of the matrix with the highest value (0 for the first and 1 for the second). 
+		The module has an effort input which increases the number of samples thus giving a more accurate count of 1's and a more accurate distinction between the two inputs. 
 	</description>
 
 	<example description="A simple example">

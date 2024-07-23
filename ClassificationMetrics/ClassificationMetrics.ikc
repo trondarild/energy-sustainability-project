@@ -1,13 +1,9 @@
 <?xml version="1.0"?>
 
-<class name="ClassificationMetrics" description="minimal example module">
+<class name="ClassificationMetrics" description="Calculates metrics for correct binary classification per invested energy and effort">
 
 	<description type="text">
-		Module that can be used as a start for a new module.
-		Simply change all occurrences of "ClassificationMetrics" to the name of your new module in
-		ClassificationMetrics.cc, MyModule.h and MyModule.ikc (this file), rename the files, and fill
-		in the new code and documentation. This module is located in the
-		UserModules directory.
+		Module that outputs correct classifications of which input has the largest number of 1's per energy unit and per effort unit; also outputs the number of correct classifications in the given sliding time window. 
 	</description>
 
 	<example description="A simple example">
@@ -22,14 +18,14 @@
 	<parameter name="windowlength" type="int" default="10" description="The first parameter" />
 	<parameter name="debug" type="bool" default="false" description="Turns on or off debugmode" />
 
-	<input name="INPUT1" description="The first input" />
-	<input name="INPUT2" description="The first input" />
+	<input name="INPUT1" description="The first binary vector input" />
+	<input name="INPUT2" description="The second binary vector input" />
 	<input name="CLASSIFICATION" description="The classification to check" />
 	<input name="ENERGY" description="The raw energy spent by the system" />
 	<input name="EFFORT" description="The effort magnitude" />
 
-	<output name="METRICENERGY" description="The first output" size="1" />
-	<output name="METRICEFFORT" description="The first output" size="1" />
+	<output name="METRICENERGY" description="Correct classifications per energy unit" size="1" />
+	<output name="METRICEFFORT" description="Correct classifications per effort unit" size="1" />
 	<output name="CORRECTRATIO" description="Fraction of correct in timewindow" size="1" />
 
 	<link class="ClassificationMetrics" />
