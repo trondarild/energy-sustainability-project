@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<group title="ClassificationMetrics Energy Example"
+
+>
+	
+		<module
+			class = "OutputFile"
+			name = "OutputFile"
+			filename = "data.txt"
+		>
+			<column name = "EFFORT" />  
+			<column name = "ENERGY" />
+            <column name = "CORRECTRATIO" />
+            <column name = "WINDOWLENGTH" />
+            <column name = "INPUTVECTORSIZE" />  
+            <column name = "ONE_COUNT1" />
+            <column name = "ONE_COUNT2" />
+		</module>
+        
+        <module
+			class = "ClassificationMetrics"
+			name = "ClassificationMetricsInstance"
+			windowlength  = "10"
+			debug="no"
+		/>
+        <module
+			class = "SampleCompare"
+			name = "SampleCompareInstance"
+			debug = "no"
+		/>
+            <module
+            class = "EnergyMeter"
+            name = "Energy"
+            address = "192.168.33.1/status"
+            _x = "10" 
+            _y = "10"
+        />
+
+		<module
+			class = "RandomOnes"
+			name = "InputVector1"
+			_outputsize  = "10"
+			_data  = "1 0 1 0 1 0 0 0 1 0"
+		/>
+		<module
+			class = "RandomOnes"
+			name = "InputVector2"
+			_outputsize  = "10"
+			_data  = "0 1 0 0 0 1 0 0 1 0"
+		/>
+		<module
+			class = "Constant"
+			name = "Effort"
+			outputsize  = "1"
+			data  = "3"
+		/>
+
+        <module
+			class = "Constant"
+			name = "OneCount1"
+			outputsize  = "1"
+			data  = "@onecount1"
+		/>
+        <module
+			class = "Constant"
+			name = "OneCount2"
+			outputsize  = "1"
+			data  = "@onecount2"
+		/>
+
+	
+		
+		
+        <connection source = "InputVector1.OUTPUT" target = "ClassificationMetricsInstance.INPUT1" />
+        <connection source= "InputVector2.OUTPUT" target = "ClassificationMetricsInstance.INPUT2" />
+		<connection source= "Effort.OUTPUT" target = "ClassificationMetricsInstance.EFFORT" />
+		<connection source= "Energy.MEASURED_POWER" target = "ClassificationMetricsInstance.ENERGY" />
+		<connection source= "SampleCompareInstance.CHOICE" target = "ClassificationMetricsInstance.CLASSIFICATION" />
+
+        <connection source = "InputVector1.OUTPUT" target = "SampleCompareInstance.INPUT1" />
+        <connection source= "InputVector2.OUTPUT" target = "SampleCompareInstance.INPUT2" />
+		<connection source= "Effort.OUTPUT" target = "SampleCompareInstance.EFFORT" />
+
+
+<view name="View metrics" >
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" h = "500" height = "361" max = "0.2" min = "0" select = "" show_frame = "false" show_title = "true" source = "ClassificationMetricsInstance.METRICENERGY" style = "" title = "Metric energy: correct / energy" w = "500" width = "341" x = "100" y = "60"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "121" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "ClassificationMetricsInstance.METRICENERGY" style = "" title = "Default Title" width = "101" x = "440" y = "60"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "200" labels = "" max = "20" min = "0" parameter = "Effort.data" select = "0" show_frame = "false" show_title = "true" show_values = "true" step = "1" style = "" title = "Effort" width = "200" x = "440" y = "160"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" h = "500" height = "361" max = "1" min = "0" select = "" show_frame = "false" show_title = "true" source = "ClassificationMetricsInstance.METRICEFFORT" style = "" title = "Metric effort: correct / effort" w = "500" width = "341" x = "100" y = "420"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" h = "500" height = "361" max = "1" min = "0" select = "" show_frame = "false" show_title = "true" source = "ClassificationMetricsInstance.CORRECTRATIO" style = "" title = "Correctratio" w = "500" width = "341" x = "100" y = "780"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "101" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "ClassificationMetricsInstance.CORRECTRATIO" style = "" title = "Default Title" width = "101" x = "440" y = "780"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "121" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "ClassificationMetricsInstance.METRICEFFORT" style = "" title = "Default Title" width = "101" x = "440" y = "420"/>
+</view>
+
+
+
+
+
+
+<view name="View compare" >
+	<table  colorize = "true" decimals = "0" direction = "normal" frame-style = "" h = "500" height = "101" label_x = "" label_y = "" max = "2" min = "0" scrollable = "false" show_frame = "false" show_title = "false" source = "InputVector1.OUTPUT" style = "" title = "Default Title" width = "521" with = "500" x = "100" y = "100"/>
+	<grid  blue = "" color = "" colorTable = "" command = "" fill = "gray" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" green = "" h = "500" height = "101" labelWidth = "100" label_parameter = "" labels = "" lineWidth = "1" max = "2" max_x = "1" max_y = "1" min = "0" min_x = "0" min_y = "0" parameter = "" red = "" scales = "no" shape = "rectangle" show_frame = "false" show_title = "true" size = "1" source = "SampleCompareInstance.OUTPUT" style = "" title = "output" valueHigh = "1" valueLow = "0" w = "500" width = "521" x = "100" y = "360"/>
+	<table  colorize = "true" decimals = "0" direction = "normal" frame-style = "" h = "500" height = "101" label_x = "" label_y = "" max = "2" min = "0" scrollable = "false" show_frame = "false" show_title = "false" source = "InputVector2.OUTPUT" style = "" title = "Default Title" width = "521" with = "500" x = "100" y = "200"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "200" labels = "" max = "20" min = "0" parameter = "Effort.data" select = "0" show_frame = "false" show_title = "true" show_values = "true" step = "1" style = "" title = "Effort" width = "200" x = "640" y = "100"/>
+	<table  x = "100" y = "480" height = "81" width = "181" title = "Default Title" source = "SampleCompareInstance.CHOICE" label_x = "" label_y = "" direction = "normal" decimals = "4" colorize = "true" scrollable = "false" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+
+
+</group>
+ 

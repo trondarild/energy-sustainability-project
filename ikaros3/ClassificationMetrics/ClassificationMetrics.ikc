@@ -1,0 +1,11 @@
+<class name="ClassificationMetrics" description="checks correctness of classifications and outputs metrics">
+	<parameter name="windowlength" type="int" default="10" description="size of moving window" />
+	<input name="INPUT1" description="" />
+	<input name="INPUT2" description="" />
+	<input name="CLASSIFICATION" description="" />
+	<input name="ENERGY" description="" />
+	<input name="EFFORT" description="" />
+	<output name="METRICENERGY" description="" size="1" />
+	<output name="METRICEFFORT" description="" size="1" />
+	<output name="CORRECTRATIO" description="" size="1" />
+</class>

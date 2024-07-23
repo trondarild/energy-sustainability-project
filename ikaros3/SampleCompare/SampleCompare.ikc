@@ -1,0 +1,8 @@
+<class name="SampleCompare" description="Choses the input with most 1s based on sampling">
+	<parameter name="debugmode" type="bool" default="no" description="Debugmode" />
+	<input name="INPUT1" description="First array to compare" />
+	<input name="INPUT2" description="Second array to compare" />
+	<input name="EFFORT" description="How much effort or samples to use when comparing" />
+	<output name="OUTPUT" description="The content of the chosen input" size="INPUT1.size"/>
+	<output name="CHOICE" description="The chosen index 1 or 2 " size="1"/>
+</class>

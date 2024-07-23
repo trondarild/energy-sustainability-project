@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<class name="BatteryMeter" description="minimal example module">
+
+	<description type="text">
+		Module outputs battery information for macbooks
+	</description>
+
+	<example description="A simple example">
+		<module
+			class="BatteryMeter"
+			name="BatteryMeter"
+			debug = "true"
+		/>
+	</example>
+
+	<parameter name="debug" type="bool" default="false" description="Turns on or off debugmode" />
+
+	
+
+	<output name="CURRENT_CAPACITY" description="Current capacity of the battery" size="1" />
+	<output name="TIME_TO_EMPTY" description="Time to the battery is empty in minutes" size="1" />
+	<output name="CURRENT" description="About one minute avg of battery amperage or current draw in mA. Negative when drawing from battery, positive when charging" size="1" />
+
+	<link class="BatteryMeter" />
+
+	<author>
+		<name>Trond Arild Tjöstheim</name>
+		<email>trond_arild.tjostheim@lucs.lu.se</email>
+		<affiliation>Lund University Cognitive Science</affiliation>
+		<homepage></homepage>
+	</author>
+
+   <files>
+   		<file>BatteryMeter.h</file>
+   		<file>BatteryMeter.cc</file>
+   		<file>BatteryMeter.ikc</file>
+   </files>
+
+</class>

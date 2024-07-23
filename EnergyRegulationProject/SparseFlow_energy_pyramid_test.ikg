@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<!--
+
+	Test of the FAST detector.
+	
+-->
+
+<group title="FAST Detector">
+
+	<module
+        class = "EnergyMeter"
+        name = "EnergyMeter"
+        address = "192.168.33.1/status"
+        _x = "10" 
+        _y = "10"
+    />
+	<module
+		class = "BatteryMeter"
+		name = "BatteryMeterInstance"
+		
+	/>
+	<module
+		class="InputVideoFile" 
+		name="InputVideo" 
+        filename="gopro.mp4"
+        _size_x="320"
+        _size_y="240"
+		_frame_rate="29.97" 
+		frame_rate="30" 
+		loop="yes"
+	/>
+
+	<module class = "Downsample" name = "D1" />
+	<module class = "Downsample" name = "D2" />
+	<module class = "Downsample" name = "D3" />
+	<module class = "Downsample" name = "D4" />
+
+	<connection  source = "InputVideo.INTENSITY"  target = "D1.INPUT" delay="0" />
+	<connection  source = "D1.OUTPUT"  target = "D2.INPUT" delay="0" />
+	<connection  source = "D2.OUTPUT"  target = "D3.INPUT" delay="0" />
+	<connection  source = "D3.OUTPUT"  target = "D4.INPUT" delay="0" />
+
+	<module class = "FASTDetector" name = "FAST0" />
+	<module class = "FASTDetector" name = "FAST1" />
+	<module class = "FASTDetector" name = "FAST2" />
+	<module class = "FASTDetector" name = "FAST3" />
+	<module class = "FASTDetector" name = "FAST4" />
+
+
+	<connection  source = "InputVideo.INTENSITY"  target = "FAST0.INPUT" delay="0" />
+	<connection  source = "D1.OUTPUT"  target = "FAST1.INPUT" delay="0" />
+	<connection  source = "D2.OUTPUT"  target = "FAST2.INPUT" delay="0" />
+	<connection  source = "D3.OUTPUT"  target = "FAST3.INPUT" delay="0" />
+	<connection  source = "D4.OUTPUT"  target = "FAST4.INPUT" delay="0" />
+
+	<module class="SparseFlow" />
+
+	<connection  source = "InputVideo.INTENSITY"  target = "SparseFlow.INPUT" delay="0" />	
+	<connection  source = "InputVideo.INTENSITY"  target = "SparseFlow.INPUT_LAST" delay="1" />
+
+	<connection  source = "FAST2.POINTS"  target = "SparseFlow.POINTS" delay="0" />
+	<connection  source = "FAST2.POINTS"  target = "SparseFlow.POINTS_LAST" delay="1" />
+	<connection  source = "FAST2.POINTS_COUNT"  target = "SparseFlow.POINTS_COUNT" delay="0" />
+	<connection  source = "FAST2.POINTS_COUNT"  target = "SparseFlow.POINTS_COUNT_LAST" delay="1" />
+
+<view name="Flow View" >
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "gray" frame-style = "" h = "4" height = "241" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "no" show_frame = "false" show_title = "false" source = "D1.OUTPUT" style = "" title = "Output" w = "4" width = "281" x = "20" y = "0" opacity_source = ""/>
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "rgb" frame-style = "" height = "961" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "yes" show_frame = "false" show_title = "false" source = "InputVideo.RED+GREEN+BLUE" style = "" title = "Image" width = "1021" x = "300" y = "0" opacity_source = ""/>
+	<marker  color = "green" count = "0" fill = "red" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" labelAlign = "center" labelBaseline = "middle" labelDecimals = "2" labelFont = "18px sans-serif" labelOffsetX = "0" labelOffsetY = "0" labelPostfix = "" labelPrefix = "" labelType = "none" labels = "" lineCap = "butt" lineJoin = "miter" lineWidth = "1" markerType = "cross" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "col" scale_x = "1" scale_y = "1" scales = "yes" select = "0" selectValue = "" show_frame = "false" show_title = "false" size = "0.02" source = "FAST1.POINTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<table  colorize = "true" decimals = "0" direction = "normal" frame-style = "" height = "21" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "FAST.POINT_COUNT" style = "" title = "Default Title" width = "121" x = "700" y = "980"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Points" title = "Default Title" width = "61" x = "640" y = "980"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "100" min = "0" parameter = "FAST0.threshold" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "20"/>
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "gray" frame-style = "" h = "4" height = "241" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "no" show_frame = "false" show_title = "false" source = "D3.OUTPUT" style = "" title = "Output" w = "4" width = "281" x = "20" y = "480" opacity_source = ""/>
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "gray" frame-style = "" h = "4" height = "241" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "no" show_frame = "false" show_title = "false" source = "D4.OUTPUT" style = "" title = "Output" w = "4" width = "281" x = "20" y = "720" opacity_source = ""/>
+	<image  command = "" file = "" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" format = "gray" frame-style = "" h = "4" height = "241" index = "" max_x = "1" max_y = "1" min_x = "0" min_y = "0" module = "" opacity = "1" scale = "both" scales = "no" show_frame = "false" show_title = "false" source = "D2.OUTPUT" style = "" title = "Output" w = "4" width = "281" x = "20" y = "240" opacity_source = ""/>
+	<marker  color = "red" count = "0" fill = "red" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" labelAlign = "center" labelBaseline = "middle" labelDecimals = "2" labelFont = "18px sans-serif" labelOffsetX = "0" labelOffsetY = "0" labelPostfix = "" labelPrefix = "" labelType = "none" labels = "" lineCap = "butt" lineJoin = "miter" lineWidth = "1" markerType = "cross" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "col" scale_x = "1" scale_y = "1" scales = "yes" select = "0" selectValue = "" show_frame = "false" show_title = "false" size = "0.02" source = "FAST2.POINTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<marker  color = "yellow" count = "0" fill = "red" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" labelAlign = "center" labelBaseline = "middle" labelDecimals = "2" labelFont = "18px sans-serif" labelOffsetX = "0" labelOffsetY = "0" labelPostfix = "" labelPrefix = "" labelType = "none" labels = "" lineCap = "butt" lineJoin = "miter" lineWidth = "1" markerType = "cross" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "col" scale_x = "1" scale_y = "1" scales = "invisible" select = "0" selectValue = "" show_frame = "false" show_title = "false" size = "0.02" source = "FAST0.POINTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<path  arrow = "true" close = "false" color = "red" count = "0" fill = "gray" flipXAxis = "no" flipXCanvas = "no" flipYAxis = "no" flipYCanvas = "no" frame-style = "" height = "961" lineCap = "butt" lineJoin = "miter" lineWidth = "2" max_x = "1" max_y = "1" min_x = "0" min_y = "0" order = "row" scale_x = "1" scale_y = "1" scales = "invisible" select = "0" show_frame = "false" show_title = "false" source = "SparseFlow.DISPLACEMENTS" style = "" title = "" width = "1021" x = "300" y = "0"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "1000" min = "0" parameter = "SparseFlow.magnification" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "60"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "1" min = "0" parameter = "FAST2.threshold" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "100"/>
+	<slider-horizontal  count = "1" frame-style = "" height = "21" labels = "" max = "100" min = "0" parameter = "SparseFlow.feature_radius" select = "0" show_frame = "false" show_title = "false" show_values = "true" step = "1" style = "" title = "Sliders" width = "221" x = "1500" y = "140"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Fast Threshold" title = "Default Title" width = "141" x = "1340" y = "20"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Vector Magnification" title = "Default Title" width = "161" x = "1340" y = "60"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Feature Threshold" title = "Default Title" width = "141" x = "1340" y = "100"/>
+	<text  frame-style = "" height = "21" parameter = "" postfix = "" prefix = "" select_source = "" separator = "" show_frame = "false" show_title = "false" strings = "" style = "" text = "Feature Radius" title = "Default Title" width = "141" x = "1340" y = "140"/>
+	<plot  x = "20" y = "960" height = "200" width = "200" title = "Measured power" source = "EnergyMeter.MEASURED_POWER" select = "" min = "0" max = "100" buffer_size = "50" direction = "vertical" color = "" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+	<plot  x = "220" y = "960" height = "200" width = "200" title = "Current battery capacity" source = "BatteryMeterInstance.CURRENT_CAPACITY" select = "" min = "0" max = "100" buffer_size = "50" direction = "vertical" color = "" show_title = "true" show_frame = "false" style = "" frame-style = ""/>
+</view>
+
+<view name="Battery View" >
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "100" min = "0" select = "" show_frame = "false" show_title = "true" source = "BatteryMeterInstance.CURRENT_CAPACITY" style = "" title = "Current capacity" width = "381" x = "20" y = "20"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "101" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "BatteryMeterInstance.CURRENT_CAPACITY" style = "" title = "Default Title" width = "101" x = "400" y = "20"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "300" min = "0" select = "" show_frame = "false" show_title = "true" source = "BatteryMeterInstance.TIME_TO_EMPTY" style = "" title = "Time to empty" width = "381" x = "20" y = "320"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "200" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "BatteryMeterInstance.TIME_TO_EMPTY" style = "" title = "Default Title" width = "200" x = "400" y = "320"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "100" min = "0" select = "" show_frame = "false" show_title = "true" source = "EnergyMeter.MEASURED_POWER" style = "" title = "Measured power" width = "381" x = "20" y = "640"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "200" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "EnergyMeter.MEASURED_POWER" style = "" title = "Default Title" width = "200" x = "400" y = "640"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "100" min = "0" select = "" show_frame = "false" show_title = "true" source = "BatteryMeterInstance.CURRENT" style = "" title = "Current" width = "381" x = "600" y = "20"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "201" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "BatteryMeterInstance.CURRENT" style = "" title = "Default Title" width = "81" x = "980" y = "20"/>
+</view>
+
+
+
+
+
+
+
+
+
+    <module class = "Logger" name = "Logger" />
+</group>
+
+
+

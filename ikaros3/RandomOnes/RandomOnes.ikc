@@ -1,0 +1,7 @@
+<class 
+	name="RandomOnes" 
+	description="Outputs an array of randomly placed ones" >
+	<parameter name="arraysize" type="int" default="10" description="size of output vector" />
+	<input name="INPUT" description="The number of ones in array" />
+	<output name="OUTPUT" description="The array of randomly placed 1s" size="@arraysize"/>
+</class>

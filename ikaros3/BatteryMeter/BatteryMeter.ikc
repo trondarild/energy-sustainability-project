@@ -1,0 +1,6 @@
+<class name="BatteryMeter" description="outputs a constant value">
+	<parameter name="data" type="matrix" default="1, 2, 3, 4, 5, 6" description="output from module" />
+	<output name="CURRENT_CAPACITY" description="The output" size="data.size"/>
+	<output name="CURRENT_CAPACITY" description="The output" size="data.size"/>
+
+</class>

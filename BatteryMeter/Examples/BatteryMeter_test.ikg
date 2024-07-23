@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<group title="BatteryMeter Example">
+	
+		
+
+		<module
+			class = "BatteryMeter"
+			name = "BatteryMeterInstance"
+			
+		/>
+		
+
+	<view name="View" >
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "100" min = "0" select = "" show_frame = "false" show_title = "true" source = "BatteryMeterInstance.CURRENT_CAPACITY" style = "" title = "Current capacity" width = "381" x = "20" y = "20"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "200" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "BatteryMeterInstance.CURRENT_CAPACITY" style = "" title = "Default Title" width = "200" x = "400" y = "20"/>
+	<plot  buffer_size = "50" color = "" direction = "vertical" frame-style = "" height = "301" max = "300" min = "0" select = "" show_frame = "false" show_title = "true" source = "BatteryMeterInstance.TIME_TO_EMPTY" style = "" title = "Time to empty" width = "381" x = "20" y = "320"/>
+	<table  colorize = "true" decimals = "4" direction = "normal" frame-style = "" height = "200" label_x = "" label_y = "" scrollable = "false" show_frame = "false" show_title = "false" source = "BatteryMeterInstance.TIME_TO_EMPTY" style = "" title = "Default Title" width = "200" x = "400" y = "320"/>
+	</view>
+
+
+
+
+</group>
+ 

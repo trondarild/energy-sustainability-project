@@ -1,0 +1,5 @@
+IKAROS: Running "ClassificationMetricsExperiment.ikg".
+IKAROS: Stop (2000 ticks, 106.72 s, 18.74 ticks/s, 0.053 s/tick)
+(base) ~/code/ikaros/Bin : sh tst.sh
+IKAROS: Running "ClassificationMetricsExperiment.ikg".
+IKAROS: Stop (2000 ticks, 105.66 s, 18.93 ticks/s, 0.053 s/tick)
